@@ -1,5 +1,6 @@
 package com.dhw.music.entity;
 
+import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 @MappedSuperclass
 @Data
+@Serialization
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(generator = "ksuid")

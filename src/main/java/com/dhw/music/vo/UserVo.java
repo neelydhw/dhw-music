@@ -1,5 +1,6 @@
 package com.dhw.music.vo;
 
+import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @date 2023/3/24
  */
 @Data
+@Serialization
 public class UserVo {
     private String id;
     private String username;

@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService{
         this.repository = repository;
     }
 
+    @Autowired
     public void setMapper(UserMapper mapper) {
         this.mapper = mapper;
     }
