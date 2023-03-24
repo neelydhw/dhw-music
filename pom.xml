@@ -82,16 +82,6 @@
                             <artifactId>mapstruct-processor</artifactId>
                             <version>${org.mapstruct.version}</version>
                         </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </path>
-                        <!-- 如果是 0.1.0 有可能出现生成了maptruct的实现类, 但该类只创建了对象, 没有进行赋值 -->
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
-                        </path>
                         <!-- other annotation processors -->
                     </annotationProcessorPaths>
                 </configuration>
