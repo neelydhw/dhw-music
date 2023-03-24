@@ -1,6 +1,5 @@
 package com.dhw.music.entity;
 
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +13,6 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Serialization
 public class Role extends AbstractEntity{
     private String name;
     private String title;

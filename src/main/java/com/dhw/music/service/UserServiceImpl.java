@@ -1,6 +1,7 @@
 package com.dhw.music.service;
 
 import com.dhw.music.dto.UserDto;
+import com.dhw.music.entity.User;
 import com.dhw.music.mapper.UserMapper;
 import com.dhw.music.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

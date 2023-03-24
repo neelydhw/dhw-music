@@ -1,7 +1,6 @@
 package com.dhw.music.entity;
 
 import com.dhw.music.enums.Gender;
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +16,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Serialization
 public class User extends AbstractEntity{
     @Column(unique = true)
     private String username;

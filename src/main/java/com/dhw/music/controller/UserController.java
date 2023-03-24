@@ -1,5 +1,7 @@
 package com.dhw.music.controller;
 
+import com.dhw.music.dto.UserDto;
+import com.dhw.music.entity.User;
 import com.dhw.music.mapper.UserMapper;
 import com.dhw.music.service.UserService;
 import com.dhw.music.vo.UserVo;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 用户接口类
