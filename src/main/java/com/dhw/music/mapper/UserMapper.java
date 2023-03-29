@@ -1,6 +1,7 @@
 package com.dhw.music.mapper;
 
 
+import com.dhw.music.dto.UserCreateDto;
 import com.dhw.music.dto.UserDto;
 import com.dhw.music.entity.User;
 import com.dhw.music.vo.UserVo;
@@ -15,4 +16,6 @@ public interface UserMapper {
     UserDto toDto(User user);
 
     UserVo toVo(UserDto userDto);
+
+    User createEntity(UserCreateDto userCreateDto);
 }
