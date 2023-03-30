@@ -3,6 +3,7 @@ package com.dhw.music.exception;
 import cn.hutool.json.JSONUtil;
 import com.dhw.music.enums.ExceptionType;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -20,10 +21,12 @@ import java.io.IOException;
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Cache-Control","no-cache");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(ExceptionType.UNAUTHORIZED.getCode());
         errorResponse.setMessage(ExceptionType.UNAUTHORIZED.getMessage());
