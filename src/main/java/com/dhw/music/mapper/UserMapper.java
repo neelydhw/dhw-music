@@ -1,11 +1,13 @@
 package com.dhw.music.mapper;
 
 
-import com.dhw.music.dto.UserCreateDto;
+import com.dhw.music.dto.UserCreateRequest;
 import com.dhw.music.dto.UserDto;
+import com.dhw.music.dto.UserUpdateRequest;
 import com.dhw.music.entity.User;
 import com.dhw.music.vo.UserVo;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 /**
  * @author Neely
@@ -17,5 +19,8 @@ public interface UserMapper {
 
     UserVo toVo(UserDto userDto);
 
-    User createEntity(UserCreateDto userCreateDto);
+    User createEntity(UserCreateRequest userCreateRequest);
+
+
+    User updateEntity(@MappingTarget User user, UserUpdateRequest updateRequest);
 }

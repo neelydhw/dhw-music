@@ -36,13 +36,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(),User.class);
-            Authentication authentication =  authenticationManager.authenticate(
+            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            user.getUsername(),user.getPassword(),new ArrayList<>()
+                            user.getUsername(), user.getPassword(), new ArrayList<>()
                     )
             );
-            return authentication;
         } catch (IOException e) {
             throw new BizException(ExceptionType.FORBIDDEN);
         }
@@ -50,11 +49,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String token  = JWT.create()
-                .withSubject(((User)authResult.getPrincipal()).getUsername())
+        String token = JWT.create()
+                .withSubject(((User) authResult.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SecurityConfig.SECRET));
-        response.addHeader(SecurityConfig.HEADER_STRING,SecurityConfig.TOKEN_PREFIX+token);
+        response.addHeader(SecurityConfig.HEADER_STRING, SecurityConfig.TOKEN_PREFIX + token);
         //super.successfulAuthentication(request, response, chain, authResult);
     }
 }

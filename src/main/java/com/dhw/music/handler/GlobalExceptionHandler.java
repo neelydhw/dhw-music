@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.file.AccessDeniedException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Neely
@@ -18,7 +20,7 @@ import java.nio.file.AccessDeniedException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
-    public ErrorResponse bizExceptionHandler(BizException e){
+    public ErrorResponse bizExceptionHandler(BizException e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(e.getCode());
         errorResponse.setMessage(e.getMessage());
@@ -27,7 +29,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ErrorResponse exceptionHandler(Exception e){
+    public ErrorResponse exceptionHandler(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(ExceptionType.INNER_ERROR.getCode());
         errorResponse.setMessage(ExceptionType.INNER_ERROR.getMessage());
@@ -36,7 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ErrorResponse accessDeniedHandler(Exception e){
+    public ErrorResponse accessDeniedHandler(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(ExceptionType.FORBIDDEN.getCode());
         errorResponse.setMessage(ExceptionType.FORBIDDEN.getMessage());
@@ -45,12 +47,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse bizExceptionHandler(MethodArgumentNotValidException e){
-        ErrorResponse errorResponse = new ErrorResponse();
+    public List<ErrorResponse> bizExceptionHandler(MethodArgumentNotValidException e) {
+        List<ErrorResponse> errorResponseList = new ArrayList<>();
+
         e.getBindingResult().getAllErrors().forEach((error) -> {
+            ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setCode(ExceptionType.BAD_REQUEST.getCode());
-            errorResponse.setMessage(ExceptionType.BAD_REQUEST.getMessage());
+            errorResponse.setMessage(error.getDefaultMessage());
+            errorResponseList.add(errorResponse);
         });
-        return errorResponse;
+        return errorResponseList;
     }
 }
