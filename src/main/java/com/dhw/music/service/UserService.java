@@ -1,5 +1,6 @@
 package com.dhw.music.service;
 
+import com.dhw.music.dto.TokenCreateRequest;
 import com.dhw.music.dto.UserCreateRequest;
 import com.dhw.music.dto.UserDto;
 import com.dhw.music.dto.UserUpdateRequest;
@@ -28,4 +29,9 @@ public interface UserService extends UserDetailsService {
     void delete(String id);
 
     Page<UserDto> search(Pageable pageable);
+
+
+    String createToken(TokenCreateRequest tokenCreateRequest);
+
+    UserDto getCurrentUser();
 }
